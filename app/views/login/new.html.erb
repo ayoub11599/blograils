@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-content">
+        <%= form_tag url: "/login", method: :post do %>
+            <div class="field">
+                <%= label_tag :email, "Adress email", class: "label" %>
+                <div class="control">
+                    <%= text_field_tag :email, nil, class: "input" %>
+                </div>
+            </div>
+
+            <div class="field">
+                <%= label_tag :password, "Mot de passe", class: "label" %>
+                <div class="control">
+                    <%= password_field_tag :password, nil, class: "input" %>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <%= submit_tag "S'inscrire", class: "button is-link" %>
+                </div>
+            </div>
+
+        <% end %>
+    </div>
+</div>

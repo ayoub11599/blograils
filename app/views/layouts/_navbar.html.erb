@@ -1,0 +1,64 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                <b>Mon Blog</b>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="true" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    Home
+                </a>
+            </div>
+
+            <div class="navbar-end">
+                    <% unless authenticated_user %>
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-primary" href="<%= register_path %>">
+                                    <strong>S'inscrire</strong>
+                                </a>
+                                <a class="button is-light" href="<%= login_path %>">
+                                    Se connecter
+                                </a>
+                            </div>
+                        </div>
+                    <% else %>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                <%= authenticated_user.username %>
+                            </a>
+
+                            <div class="navbar-dropdown is-boxed is-right">
+                                <a class="navbar-item">
+                                    Dashboard
+                                </a>
+                                <a class="navbar-item">
+                                    Blogs
+                                </a>
+                                <a class="navbar-item">
+                                    Categories
+                                </a>
+                                <a class="navbar-item">
+                                    Tags
+                                </a>
+                                <hr class="navbar-divider">
+                                <div class="navbar-item">
+                                    Se déconnecter
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
