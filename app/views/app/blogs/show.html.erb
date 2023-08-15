@@ -1,0 +1,23 @@
+<section class="section">
+    <div class="section-header">
+        <h1>Blogs</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="<%= app_dashboard_path %>">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="<%= app_blogs_path %>">Blogs</a></div>
+            <div class="breadcrumb-item">Détail</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1><%= @blog.title %></h1>
+                    <hr/>
+                    <p><%= @blog.content %></p>
+                    <hr>
+                    <p>Le <b><%= @blog.formatted_created_at %></b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,41 @@
+<section class="section">
+    <div class="section-header">
+        <h1>Blogs </h1><a class="text-sm ml-3 btn btn-success" href="<%= new_app_blog_path %>">+</a>  
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="<%= app_dashboard_path %>">Dashboard</a></div>
+            <div class="breadcrumb-item">Blogs</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-md">
+                            <tbody>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Categorie</th>
+                                    <th>Créé le</th>
+                                    <th>Action</th>
+                                </tr>
+                                <% @blogs.each do |b| %>
+                                    <tr>
+                                        <td><%= b.title %></td>
+                                        <td><%= b.category.name %></td>
+                                        <td><%= b.formatted_created_at %></td>
+                                        <td class="d-flex">
+                                            <a href="<%= app_blog_path(b.id) %>" class="btn btn-info btn-sm">Détail</a>
+                                            <a href="<%= edit_app_blog_path(b.id) %>" class="btn btn-warning btn-sm mx-2">Modifier</a>
+                                            <%= button_to  "Supprimer", app_blog_path(b), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Vous êtes sûr ?" }, class: "btn btn-danger btn-sm"%>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

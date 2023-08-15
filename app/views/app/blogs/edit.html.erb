@@ -1,0 +1,49 @@
+<section class="section">
+    <div class="section-header">
+        <h1>Blogs</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="<%= app_dashboard_path %>">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="<%= app_blogs_path %>">Blogs</a></div>
+            <div class="breadcrumb-item">Modifier</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <% if flash[:success] %>
+            <div class="alert alert-success">
+                <%= flash[:success] %>
+            </div>
+        <% end %>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <%= form_for @blog, url: app_blog_path do |f| %>
+                        <div class="form-group">
+                            <%= f.label :title, "Titre" %>
+                            <%= f.text_field :title, class: "form-control" %>
+                            <% if @blog.errors[:title].any? %>
+                                <span class="text-danger"><%= @blog.errors[:title].first %></span>
+                            <% end %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :category_id, "Categorie" %>
+                            <%= f.select :category_id, Category.all.map{|c| [c.name, c.id]}, {}, class: "form-control" %>
+                            <% if @blog.errors[:category_id].any? %>
+                                <span class="text-danger"><%= @blog.errors[:category_id].first %></span>
+                            <% end %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :content, "Content" %>
+                            <%= f.text_area :content, class: "form-control h-100", :rows => 10 %>
+                            <% if @blog.errors[:content].any? %>
+                                <span class="text-danger"><%= @blog.errors[:content].first %></span>
+                            <% end %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.submit "Modifer", class: "btn btn-primary btn-lg btn-block" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   namespace :app do
     get "/", to: "dashboard#index", as: "dashboard"
+    resources :categories
+    resources :blogs
   end
 
 end

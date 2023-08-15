@@ -1,6 +1,9 @@
 class RegisterController < ApplicationController
+    layout "auth_layout"
+    before_action :authenticated
     def new
         @user = User.new
+        @is_login_page = false
     end
 
     def store
