@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_143536) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_161246) do
   create_table "blogs", force: :cascade do |t|
     t.integer "category_id"
     t.string "title"
@@ -18,7 +18,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_143536) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["category_id"], name: "index_blogs_on_category_id"
+    t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -26,6 +28,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_143536) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer "blog_id"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_id"], name: "index_images_on_blog_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,4 +48,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_143536) do
 
   add_foreign_key "blogs", "categories"
   add_foreign_key "blogs", "categories"
+  add_foreign_key "blogs", "users"
+  add_foreign_key "blogs", "users"
+  add_foreign_key "images", "blogs"
+  add_foreign_key "images", "blogs"
 end

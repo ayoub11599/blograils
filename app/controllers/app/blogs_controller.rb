@@ -1,18 +1,19 @@
 module App
     class BlogsController < ApplicationController
         before_action :guest
-        before_action :set_blog, only: [:show, :edit, :update]
+        before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
         def index
-            @blogs = Blog.eager_load(:category).all
+            @blogs = @authenticated_user.blogs().eager_load(:category).all
         end
 
         def new
             @blog = Blog.new
+            #@blog.build_image
         end
 
         def create
-            @blog = Blog.new(blog_params)
+            @blog = authenticated_user.blogs().new(blog_params)
             if @blog.save
                 redirect_to new_app_blog_path, success: "Le blog est créé avec succès !!"
             else
@@ -32,14 +33,14 @@ module App
         end
 
         def destroy
-            Blog.destroy(params[:id])
+            @blog.destroy
             redirect_to app_blogs_path, status: :see_other
         end
 
         private
 
         def blog_params
-            params.require(:blog).permit(:title, :content, :category_id)
+            params.require(:blog).permit(:title, :content, :category_id, :user_id)
         end
 
         def set_blog

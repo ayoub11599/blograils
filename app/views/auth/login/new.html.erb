@@ -1,5 +1,4 @@
-
-<%= form_tag "/login", method: :post do %>
+<%= form_tag auth_login_path, method: :post do %>
     <div class="form-group">
         <%= label_tag :email, "Adress email", class: "control-label" %>
         <%= text_field_tag :email, nil, class: "form-control" %>
@@ -11,6 +10,6 @@
     </div>
 
     <div class="form-group">
-        <%= submit_tag "S'inscrire", class: "btn btn-primary btn-lg btn-block" %>
+        <%= submit_tag "Se connecter", class: "btn btn-primary btn-lg btn-block" %>
     </div>
 <% end %>

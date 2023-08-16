@@ -1,5 +1,4 @@
-
-<%= form_with url: "/register", method: :post, model: @user do |f| %>
+<%= form_with url: auth_register_path, method: :post, model: @user do |f| %>
 
     <div class="form-group">
         <%= f.label :username, "Nom complet" %>

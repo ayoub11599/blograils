@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  root to: "login#new"
-  get "/register", to: "register#new", as: "register"
-  post "/register", to: "register#store"
-  get "/login", to: "login#new", as: "login"
-  post "/login", to: "login#create"
+  root "auth/login#new"
+
+  namespace :auth do
+    get "/register", to: "register#new"
+    post "/register", to: "register#create"
+    get "/login", to: "login#new"
+    post "/login", to: "login#create"
+    post "/logout", to: "logout#destroy"
+  end
   
   namespace :app do
     get "/", to: "dashboard#index", as: "dashboard"

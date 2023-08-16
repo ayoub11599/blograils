@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     add_flash_types :success, :danger, :warning
     helper_method :authenticated_user
+    protect_from_forgery with: :exception
 
     def authenticated_user
         @authenticated_user ||= User.find_by(id: session[:user_id])
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::Base
 
     def guest
         if !authenticated_user
-            redirect_to login_path
+            redirect_to auth_login_path
         end
     end
 end

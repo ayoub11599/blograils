@@ -1,7 +1,7 @@
 module App
     class CategoriesController < ApplicationController
         before_action :guest
-        before_action :set_category, only: [:show, :edit, :update]
+        before_action :set_category, only: [:show, :edit, :update, :destroy]
         
         def index
             @categories = Category.all
@@ -32,7 +32,7 @@ module App
         end
 
         def destroy
-            Category.destroy(params[:id])
+            @category.destroy
             redirect_to app_categories_path, status: :see_other
         end
 

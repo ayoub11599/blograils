@@ -19,12 +19,16 @@
                                     <th>Action</th>
                                 </tr>
                                 <% @categories.each do |c| %>
-                                    <tr>
+                                    <tr id="category-<%= c.id %>">
                                         <td><%= c.name %></td>
                                         <td><%= c.formatted_created_at %></td>
                                         <td class="d-flex">
                                             <a href="<%= edit_app_category_path(c.id) %>" class="btn btn-warning btn-sm mr-2">Modifier</a>
-                                            <%= button_to  "Supprimer", app_category_path(c), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Vous êtes sûr ?" }, class: "btn btn-danger btn-sm"%>
+                                            <form id="delete_category_form_<%= c.id %>" action="<%= app_category_path(c) %>" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                                <button type="submit" class="btn btn-danger btn-sm btn_delete_category" data-count="<%= c.blogs.count() %>" data-id="<%= c.id %>" >Supprimer</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <% end %>
@@ -36,3 +40,14 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    $(".btn_delete_category").on("click", function(event) {
+        event.preventDefault();
+        const id = $(this).data("id");
+        const count = $(this).data("count");
+        if ( count == 0 || confirm("La catégorie est dèja utilisé, voulez vous supprimer (la catégorie et les blogs liées) ? ") ) {
+            $(`#delete_category_form_${id}`).submit();
+        }
+    });
+</script>
