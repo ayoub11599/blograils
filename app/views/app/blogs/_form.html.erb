@@ -13,6 +13,14 @@
             <span class="text-danger"><%= @blog.errors[:category_id].first %></span>
         <% end %>
     </div>
+
+    <div class="form-group">
+        <%= f.label :image, "Image" %>
+        <%= f.file_field :image, class: "form-control" %>
+        <% if @blog.errors.has_key?(:image) %>
+            <span class="text-danger"><%= @blog.errors[:image].join(', ') %></span>
+        <% end %>
+    </div>
     
     <div class="form-group">
         <%= f.label :content, "Content" %>
@@ -21,6 +29,17 @@
             <span class="text-danger"><%= @blog.errors[:content].first %></span>
         <% end %>
     </div>
+
+    <div class="form-group">
+        <%= f.label :tags %>
+        <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name, { checked: @blog.tag_ids }) do |cb| %>
+      <div class="form-check">
+        <%= cb.check_box(class: 'form-check-input') %>
+        <%= cb.label(class: 'form-check-label') %>
+      </div>
+    <% end %>
+    </div>
+
     <div class="form-group">
         <%= f.submit local_assigns[:name], class: "btn btn-primary btn-lg btn-block" %>
     </div>

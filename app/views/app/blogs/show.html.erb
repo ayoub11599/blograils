@@ -10,6 +10,9 @@
     <div class="section-body">
         <div class="col-12">
             <div class="card">
+                <% if @blog.image.attached? %>
+                    <%= image_tag @blog.image, class: "card-img-top", style: "height: 400px", alt: @blog.title %>
+                <% end %>
                 <div class="card-body">
                     <h1><%= @blog.title %></h1>
                     <hr/>

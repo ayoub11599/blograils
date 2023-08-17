@@ -9,7 +9,6 @@ module App
 
         def new
             @blog = Blog.new
-            #@blog.build_image
         end
 
         def create
@@ -17,7 +16,7 @@ module App
             if @blog.save
                 redirect_to new_app_blog_path, success: "Le blog est créé avec succès !!"
             else
-                render new, status: :unprocessable_entity
+                render :new, status: :unprocessable_entity
             end
         end
 
@@ -40,7 +39,7 @@ module App
         private
 
         def blog_params
-            params.require(:blog).permit(:title, :content, :category_id, :user_id)
+            params.require(:blog).permit(:title, :content, :category_id, :user_id, :image, blog_tags_attributes: [:id, :tag_id, :_destroy])
         end
 
         def set_blog

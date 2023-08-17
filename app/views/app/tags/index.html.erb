@@ -1,0 +1,49 @@
+<section class="section">
+    <div class="section-header">
+        <h1>Tags </h1><a class="text-sm ml-3 btn btn-success" href="<%= new_app_tag_path %>">+</a>  
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="<%= app_dashboard_path %>">Dashboard</a></div>
+            <div class="breadcrumb-item">Tags</div>
+        </div>
+    </div>
+    <div class="section-body">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-md">
+                            <tbody>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Créé le</th>
+                                    <th>Action</th>
+                                </tr>
+                                <% @tags.each do |t| %>
+                                    <tr id="tag-<%= t.id %>">
+                                        <td><%= t.name %></td>
+                                        <td><%= t.formatted_created_at %></td>
+                                        <td class="d-flex">
+                                            <a href="<%= edit_app_tag_path(t.id) %>" class="btn btn-warning btn-sm mr-2">Modifier</a>
+                                            <%= button_to "Delete", app_tag_path(t), method: :delete, class: "btn btn-danger btn-sm" %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(".btn_delete_category").on("click", function(event) {
+        event.preventDefault();
+        const id = $(this).data("id");
+        const count = $(this).data("count");
+        if ( count == 0 || confirm("La catégorie est dèja utilisé, voulez vous supprimer (la catégorie et les blogs liées) ? ") ) {
+            $(`#delete_category_form_${id}`).submit();
+        }
+    });
+</script>

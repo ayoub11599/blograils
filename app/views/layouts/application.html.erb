@@ -33,7 +33,7 @@
                           <div class="dropdown-divider"></div>
                           <form action="<%= auth_logout_path %>" method="POST">
                                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-                                <button type="submit" class="dropdown-item has-icon text-danger logout-button">
+                                <button type="submit" class="dropdown-item has-icon text-danger logout-button d-flex align-items-center">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </button>
                           </form>
@@ -60,8 +60,8 @@
                               <i class="fa-solid fa-calendar-days"></i> <span>Categories</span>
                           </a>
                       </li>
-                      <li class="">
-                          <a class="nav-link" href="<%= app_dashboard_path %>">
+                      <li class="<%= 'active' if controller_name === "tags" %>">
+                          <a class="nav-link" href="<%= app_tags_path %>">
                               <i class="fa-solid fa-tags"></i> <span>Tags</span>
                           </a>
                       </li>
